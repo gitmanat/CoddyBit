@@ -1,6 +1,6 @@
 # Coddy:bit
 
-Extension for Coddy:bit V1.0.1
+Extension for Coddy:bit V1.0.2
 
 ## License
 
