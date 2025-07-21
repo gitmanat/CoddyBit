@@ -5,7 +5,7 @@ load dependency
 "Tinybit": "file:../pxt-Tinybit"
 */
 
-//% color="#006400" weight=20 icon="\uf1b9"
+//% color="#FF6600" icon="\uf1b9" block="KIDSCODDY"
 namespace Tinybit {
 
     const PWM_ADD = 0x01
