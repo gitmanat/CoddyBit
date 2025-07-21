@@ -95,13 +95,13 @@ namespace Tinybit {
     
     
     export enum CarState {
-        //% blockId="Car_Run" block="MoveForward"
+        //% blockId="Car_Run" block="Run"
         Car_Run = 1,
-        //% blockId="Car_Back" block="MoveBackward"
+        //% blockId="Car_Back" block="Back"
         Car_Back = 2,
-        //% blockId="Car_Left" block="TurnLeft"
+        //% blockId="Car_Left" block="Left"
         Car_Left = 3,
-        //% blockId="Car_Right" block="TurnRight"
+        //% blockId="Car_Right" block="Right"
         Car_Right = 4,
         //% blockId="Car_Stop" block="Stop"
         Car_Stop = 5,
@@ -192,7 +192,7 @@ namespace Tinybit {
      * @param index
      */   
 
-    //% blockId=Tinybit_RGB_Car_Program block="AGB_Car_Program"
+    //% blockId=Tinybit_RGB_Car_Program block="RGB_Car_Program"
     //% weight=99
     //% blockGap=10
     //% color="#006400"
