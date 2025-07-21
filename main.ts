@@ -5,7 +5,7 @@ load dependency
 "Tinybit": "file:../pxt-Tinybit"
 */
 
-//% color=#FF6600 icon="\uf1b9" block="Coddybit"
+//% color="#006400" weight=20 icon="\uf1b9"
 namespace Tinybit {
 
     const PWM_ADD = 0x01
@@ -291,7 +291,7 @@ namespace Tinybit {
     //% blockId=Tinybit_CarCtrl block="CarCtrl|%index"
     //% weight=93
     //% blockGap=10
-    //% color="#058671ff"
+    //% color="#006400"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
     export function CarCtrl(index: CarState): void {
         switch (index) {
