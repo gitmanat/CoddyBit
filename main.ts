@@ -192,7 +192,7 @@ namespace coddybit {
      * @param index
      */   
 
-    //% blockId=Tinybit_RGB_Car_Program block="RGB_Car_Program"
+    //% blockId=Tinybit_RGB_Car_Program block="AGB_Car_Program"
     //% weight=99
     //% blockGap=10
     //% color="#006400"
