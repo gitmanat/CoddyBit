@@ -6,7 +6,7 @@ load dependency
 */
 
 //% color=#FF6600 icon="\uf1b9" block="Coddybit"
-namespace coddybit {
+namespace Tinybit {
 
     const PWM_ADD = 0x01
     const MOTOR = 0x02
