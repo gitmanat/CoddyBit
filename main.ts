@@ -208,6 +208,7 @@ namespace Tinybit {
     //% blockId=Tinybit_RGB_Car_Big block="RGB_Car_Big|value %value"
     //% weight=98
     //% blockGap=10
+    //% color="#006400"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function RGB_Car_Big(value: enColor): void {
 
@@ -249,6 +250,7 @@ namespace Tinybit {
     //% blockId=Tinybit_RGB_Car_Big2 block="RGB_Car_Big2|value1 %value1|value2 %value2|value3 %value3"
     //% weight=97
     //% blockGap=10
+    //% color="#006400"
     //% value1.min=0 value1.max=255 value2.min=0 value2.max=255 value3.min=0 value3.max=255
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function RGB_Car_Big2(value1: number, value2: number, value3: number): void {
@@ -381,6 +383,7 @@ namespace Tinybit {
     //% blockId=Tinybit_Voice_Sensor block="Voice Sensor return"
     //% weight=88
     //% blockGap=10
+    //% color="#006400"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=12
     export function Voice_Sensor(): number {
 	    //pins.setPull(DigitalPin.P1, PinPullMode.PullUp);
