@@ -1,6 +1,6 @@
-# Tiny:bit
+# Coddy:bit
 
-Extension for Yahboom Tiny:bit V2.0.3
+Extension for Coddy:bit V1.0.0
 
 ## License
 
