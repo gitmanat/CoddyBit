@@ -440,47 +440,6 @@ namespace Tinybit {
         CarCtrlSpeed2(CarState.Car_Run, leftSpeed, rightSpeed)
     }*/
 
-    let previousHeadingError = 0
-    let headingFilteredOutput = 0
-
-    /**
-     * เดินตามทิศที่กำหนด โดยใช้ PD จาก Compass (micro:bit V2)
-     */
-    //% blockId="CoddyBit_HeadingPD"
-    //% block="เดินตามทิศ %targetHeading° |Kp %kp|Kd %kd|speed %base|dead zone %dead|alpha %alpha"
-    //% weight=60 color="#FF6600"
-    export function headingPD(
-        targetHeading: number,
-        kp: number,
-        kd: number,
-        baseSpeed: number,
-        dead: number,
-        alpha: number
-    ): void {
-
-        let current = input.compassHeading()
-        let error = targetHeading - current
-
-        // ให้ error อยู่ในช่วง -180 ถึง +180 องศา
-        if (error > 180) error -= 360
-        if (error < -180) error += 360
-
-        const derivative = error - previousHeadingError
-        previousHeadingError = error
-
-        const rawOutput = kp * error + kd * derivative
-        headingFilteredOutput = alpha * headingFilteredOutput + (1 - alpha) * rawOutput
-
-        if (Math.abs(headingFilteredOutput) < dead) {
-            headingFilteredOutput = 0
-        }
-
-        let leftSpeed = baseSpeed + headingFilteredOutput
-        let rightSpeed = baseSpeed - headingFilteredOutput
-
-        CarCtrlSpeed2(CarState.Car_Run, leftSpeed, rightSpeed)
-    }
-
 
 
 
