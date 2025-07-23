@@ -380,6 +380,53 @@ namespace Tinybit {
 
     }
 
+    let error = 0
+    let previousError = 0
+    let filteredOutput = 0
+
+    /**
+     * Line Following แบบ PD Control (ตั้งค่า Kp, Kd, base, max, min, deadZone, alpha)
+     */
+    //% blockId="CoddyBit_LineFollowPD"
+    //% block="Line Follow (PD)|Kp %kp|Kd %kd|base %base|max %max|min %min|deadZone %dead|alpha %alpha"
+    //% weight=75 color="#FF6600" blockGap=8
+    export function LineFollowPD(
+        kp: number, kd: number,
+        base: number, max: number, min: number,
+        dead: number, alpha: number
+    ): void {
+        const leftRaw = pins.digitalReadPin(DigitalPin.P13)
+        const rightRaw = pins.digitalReadPin(DigitalPin.P14)
+        const left = (leftRaw == 0) ? 1 : 0
+        const right = (rightRaw == 0) ? 1 : 0
+
+        if (left && !right) error = -1
+        else if (!left && right) error = 1
+        else if (!left && !right) error = 0
+        else error = previousError
+
+        const derivative = error - previousError
+        const rawOutput = kp * error + kd * derivative
+        previousError = error
+
+        filteredOutput = alpha * filteredOutput + (1 - alpha) * rawOutput
+        if (Math.abs(filteredOutput) < dead) filteredOutput = 0
+
+        const absErr = Math.abs(error)
+        const maxErr = 4.0
+        const dynRange = max - min
+        let dynSpeed = max - dynRange * (absErr / maxErr)
+        dynSpeed = Math.max(min, Math.min(max, dynSpeed))
+
+        let leftSpeed = dynSpeed + filteredOutput
+        let rightSpeed = dynSpeed - filteredOutput
+        leftSpeed = Math.max(-max, Math.min(max, leftSpeed))
+        rightSpeed = Math.max(-max, Math.min(max, rightSpeed))
+
+        CarCtrlSpeed2(CarState.Car_Run, leftSpeed, rightSpeed)
+    }
+
+
     //% blockId=Tinybit_Voice_Sensor block="Voice Sensor return"
     //% weight=88
     //% blockGap=10
