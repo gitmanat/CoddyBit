@@ -385,37 +385,51 @@ namespace Tinybit {
     let filteredOutput = 0
 
     /**
-     * Line Following แบบ PD Control (ตั้งค่า Kp, Kd, base, max, min, deadZone, alpha)
+     * Line Follow (PD) ด้วย analogRead จากเซ็นเซอร์ 2 ตัว
      */
-    //% blockId="CoddyBit_LineFollowPD"
-    //% block="Line Follow (PD)|Kp %kp|Kd %kd|base %base|max %max|min %min|deadZone %dead|alpha %alpha"
+    //% blockId="CoddyBit_LineFollowAnalogPD"
+    //% block="Line Follow Analog PD|Kp %kp|Kd %kd|base %base|max %max|min %min|deadZone %dead|alpha %alpha"
     //% weight=75 color="#FF6600" blockGap=8
-    export function LineFollowPD(
+    export function LineFollowAnalogPD(
         kp: number, kd: number,
         base: number, max: number, min: number,
         dead: number, alpha: number
     ): void {
-        const leftRaw = pins.digitalReadPin(DigitalPin.P13)
-        const rightRaw = pins.digitalReadPin(DigitalPin.P14)
-        const left = (leftRaw == 0) ? 1 : 0
-        const right = (rightRaw == 0) ? 1 : 0
 
-        if (left && !right) error = -1
-        else if (!left && right) error = 1
-        else if (!left && !right) error = 0
-        else error = previousError
+        // อ่านค่า Analog (0-1023)
+        const leftVal = pins.analogReadPin(AnalogPin.P13)
+        const rightVal = pins.analogReadPin(AnalogPin.P14)
 
+        // ปกติพื้นสีขาวจะได้ค่าสูง (แสงมาก) สีดำจะได้ค่าต่ำ (แสงน้อย)
+        // ถ้าอยากกลับด้านให้เหมือนค่าความเข้มของสีดำ → พลิกกลับ:
+        const left = 1023 - leftVal
+        const right = 1023 - rightVal
+
+        // คำนวณตำแหน่งของเส้น (-1 ถึง +1)
+        let position = 0
+        const total = left + right
+        if (total > 10) {
+            position = ((-1 * left) + (1 * right)) / total
+        } else {
+            // ไม่เห็นเส้น → ใช้ค่าเดิม
+            position = error
+        }
+
+        error = position
         const derivative = error - previousError
-        const rawOutput = kp * error + kd * derivative
         previousError = error
 
+        const rawOutput = kp * error + kd * derivative
         filteredOutput = alpha * filteredOutput + (1 - alpha) * rawOutput
-        if (Math.abs(filteredOutput) < dead) filteredOutput = 0
+
+        // Dead zone
+        if (Math.abs(filteredOutput) < dead) {
+            filteredOutput = 0
+        }
 
         const absErr = Math.abs(error)
-        const maxErr = 4.0
         const dynRange = max - min
-        let dynSpeed = max - dynRange * (absErr / maxErr)
+        let dynSpeed = max - dynRange * absErr
         dynSpeed = Math.max(min, Math.min(max, dynSpeed))
 
         let leftSpeed = dynSpeed + filteredOutput
@@ -425,6 +439,7 @@ namespace Tinybit {
 
         CarCtrlSpeed2(CarState.Car_Run, leftSpeed, rightSpeed)
     }
+
 
 
     //% blockId=Tinybit_Voice_Sensor block="Voice Sensor return"
