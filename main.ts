@@ -458,7 +458,7 @@ namespace Tinybit {
     //% block="MPU6050 yaw angle"
     //% weight=90
     //% group="MPU6050"
-    function getYaw(): number {
+    export function getYaw(): number {
         return Math.round(yaw)
     }
 
