@@ -440,6 +440,29 @@ namespace Tinybit {
         CarCtrlSpeed2(CarState.Car_Run, leftSpeed, rightSpeed)
     }*/
 
+    let yaw = 0
+    let lastUpdate = input.runningTime()
+
+    basic.forever(function () {
+        let now = input.runningTime()
+        let dt = (now - lastUpdate) / 1000
+        lastUpdate = now
+
+        let gyroZ = SENMPU6050.gyroscope(axisXYZ.z, gyroSen.range_250_dps)
+        yaw += gyroZ * dt
+
+        yaw = yaw % 360
+        if (yaw < 0) yaw += 360
+    })
+
+    //% block="MPU6050 yaw angle"
+    //% weight=90
+    //% group="MPU6050"
+    function getYaw(): number {
+        return Math.round(yaw)
+    }
+
+
 
 
 
