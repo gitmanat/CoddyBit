@@ -440,7 +440,7 @@ namespace Tinybit {
         CarCtrlSpeed2(CarState.Car_Run, leftSpeed, rightSpeed)
     }*/
 
-    let yaw = 0
+    /*let yaw = 0
     let lastUpdate = input.runningTime()
 
     basic.forever(function () {
@@ -460,7 +460,7 @@ namespace Tinybit {
     //% group="MPU6050"
     export function getYaw(): number {
         return Math.round(yaw)
-    }
+    }*/
 
 
 
