@@ -95,19 +95,19 @@ namespace Tinybit {
     
     
     export enum CarState {
-        //% blockId="Car_Run" block="MoveForward"
+        //% blockId="Car_Run" block="⬆ MoveForward"
         Car_Run = 1,
-        //% blockId="Car_Back" block="MoveBackward"
+        //% blockId="Car_Back" block="⬇ MoveBackward"
         Car_Back = 2,
-        //% blockId="Car_Left" block="TurnLeft"
+        //% blockId="Car_Left" block="↰ TurnLeft"
         Car_Left = 3,
-        //% blockId="Car_Right" block="TurnRight"
+        //% blockId="Car_Right" block="↱ TurnRight"
         Car_Right = 4,
-        //% blockId="Car_Stop" block="Stop"
+        //% blockId="Car_Stop" block="⏹ Stop"
         Car_Stop = 5,
-        //% blockId="Car_SpinLeft" block="SpinLeft"
+        //% blockId="Car_SpinLeft" block="⬅ SpinLeft"
         Car_SpinLeft = 6,
-        //% blockId="Car_SpinRight" block="SpinRight"
+        //% blockId="Car_SpinRight" block="➡ SpinRight"
         Car_SpinRight = 7
     }
 
